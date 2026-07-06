@@ -28,7 +28,7 @@
 
 ## 🎯 功能概览
 
-### 1️⃣ 产业链全景图
+### 产业链全景图
 输入任意 A 股股票代码，自动生成三层产业链结构：
 
 ```
@@ -37,17 +37,7 @@
 
 **每个节点附带对应板块的实时涨跌幅**，🔴 红涨 🟢 绿跌，一眼看清产业链冷暖。
 
-### 2️⃣ 基本面选股
-按价值投资标准（低 PE、低 PB、高股息率）从全市场筛选标的，并按产业链归类展示。
-
-| 筛选条件 | 说明 |
-|---------|------|
-| PE_TTM | > 0 且 < 20 |
-| PB | > 0 且 < 2 |
-| 股息率 | > 0.5% |
-| 市值 | > 50 亿 |
-
-### 3️⃣ 深色主题 HTML 输出
+### 深色主题 HTML 输出
 - 自包含页面，零外部依赖
 - 深色主题，卡片式布局
 - 移动端自适应
@@ -60,6 +50,7 @@
 ### 前置条件
 
 - Python 3.8+
+- [Tushare](https://tushare.pro/) 账号与 API Token
 
 ### 安装
 
@@ -71,20 +62,18 @@ cd chain-analyzer
 # 安装依赖
 pip install tushare
 
-# 配置 Token（任选一个数据源，详见下方说明）
+# 配置 Token
 export TUSHARE_TOKEN="your_tushare_token_here"
 ```
 
 ### 运行
 
 ```bash
-# 生成产业链全景图
 cd scripts
 python3 render.py 600580.SH
-
-# 基本面选股 + 产业链分布
-python3 value_screener.py
 ```
+
+输出文件：`{股票名}_产业链全景_{代码}.html`
 
 ---
 
@@ -101,89 +90,48 @@ python3 render.py 300750.SZ
 python3 render.py 600519.SH
 ```
 
-输出文件：`{股票名}_产业链全景_{代码}.html`
-
 ---
 
 ## 🔌 数据源配置
 
-本工具默认使用 **Tushare Pro** 获取数据。以下列出可用的免费/低门槛数据源，任选其一即可。
+本工具默认使用 **Tushare Pro**。以下列出可选的免费/低门槛数据源：
 
-### 方案一：Tushare Pro（推荐 · 默认）
+### 方案一：Tushare Pro（推荐）
 
 | 项目 | 说明 |
 |------|------|
 | 官网 | [tushare.pro](https://tushare.pro/) |
-| 费用 | 注册免费，基础接口免费使用；部分高级接口需积分（注册送 100 分，可通过社区贡献获取） |
-| 注册流程 | ① 手机号注册 → ② 登录后点右上角头像 → 「个人主页」→ 「接口TOKEN」→ 复制 token |
+| 费用 | 注册免费，基础接口免费 |
+| 注册 | 手机号注册 → 个人主页 → 接口TOKEN |
 | 本工具用法 | `export TUSHARE_TOKEN="你的token"` |
-| 覆盖数据 | 股票行情、财务指标、公司信息、板块指数等 |
 
-**免费可用的接口**（本工具使用到的）：
-- `stock_basic` — 股票列表（免费）
-- `daily` — 日线行情（免费）
-- `daily_basic` — 每日指标（PE/PB/股息率）（免费）
-- `stock_company` — 公司信息（免费）
-- `ths_daily` / `ths_index` — 同花顺板块指数（免费）
-- `fina_indicator` — 财务指标（需少量积分，可用社区积分兑换）
+**用到的接口**（均为免费）：
+- `stock_basic` — 股票信息
+- `daily` — 日线行情
+- `stock_company` — 公司介绍
+- `ths_daily` / `ths_index` — 同花顺板块指数
 
-> 💡 积分不够时，可发帖或回答问题获取免费积分，也可直接切换到方案二。
+### 方案二：AKShare（纯免费）
 
-### 方案二：AKShare（纯免费 · 无需注册）
-
-| 项目 | 说明 |
-|------|------|
-| 文档 | [akshare.akfamily.xyz](https://akshare.akfamily.xyz/) |
-| 费用 | **完全免费**，无需注册、无需 Token |
-| 安装 | `pip install akshare` |
-| 覆盖数据 | A 股行情、财务数据、板块概念、行业分类等 |
-| 注意事项 | 数据源来自东方财富/新浪等公开接口，偶尔因网站改版需升级库版本 |
-
-**本工具适配思路**：将 `chain_data.py` 中的 `ts.pro_api()` 调用替换为对应的 `akshare` 函数即可。例如：
-
-```python
-# Tushare 写法
-df = pro.daily(ts_code='600580.SH')
-
-# AKShare 等价写法
-import akshare as ak
-df = ak.stock_zh_a_hist(symbol="600580", period="daily")
+```bash
+pip install akshare
 ```
 
-### 方案三：Baostock（纯免费 · 无需注册）
+将 `chain_data.py` 中的 Tushare 调用替换为对应的 AKShare 函数即可。
 
-| 项目 | 说明 |
-|------|------|
-| 文档 | [baostock.com](http://baostock.com/) |
-| 费用 | **完全免费**，无需注册 |
-| 安装 | `pip install baostock` |
-| 覆盖数据 | K 线、财务指标、行业分类、指数成分股等 |
-| 特点 | 数据规范、接口稳定，适合量化回测 |
+### 方案三：Baostock（纯免费）
 
-### 方案四：东方财富 Choice 数据（部分免费）
-
-| 项目 | 说明 |
-|------|------|
-| 访问方式 | 通过 `akshare` 间接调用（底层爬取东方财富网页接口） |
-| 费用 | 基础数据免费 |
-| 覆盖数据 | 实时行情、板块资金流向、概念板块等 |
-
-### 方案五：聚宽 / 米筐（量化平台）
-
-| 项目 | 说明 |
-|------|------|
-| 官网 | [joinquant.com](https://www.joinquant.com/) / [ricequant.com](https://www.ricequant.com/) |
-| 费用 | 注册免费，提供研究环境 + 数据 API |
-| 特点 | 需在平台内运行，适合策略研究场景 |
+```bash
+pip install baostock
+```
 
 ### 如何选择？
 
 | 你的情况 | 推荐方案 |
 |---------|---------|
-| 想开箱即用、最省事 | **方案一 Tushare**（注册 1 分钟，基础功能全免费） |
-| 不想注册任何账号 | **方案二 AKShare**（纯免费，pip 安装即用） |
-| 做量化回测、需要本地化数据 | **方案三 Baostock** |
-| 需要实时行情 + 板块资金流 | **方案二 AKShare**（底层走东方财富） |
+| 想开箱即用 | **Tushare**（注册 1 分钟） |
+| 不想注册 | **AKShare**（pip 即用） |
+| 量化回测 | **Baostock** |
 
 ---
 
@@ -220,8 +168,6 @@ df = ak.stock_zh_a_hist(symbol="600580", period="daily")
 
 ## 🖼️ 输出预览
 
-### 产业链全景图
-
 ```
 ┌─────────────────────────────────────────────────────┐
 │  🏭 卧龙电驱 · 产业链全景                            │
@@ -252,10 +198,6 @@ df = ak.stock_zh_a_hist(symbol="600580", period="daily")
 └─────────────────────────────────────────────────────┘
 ```
 
-### 基本面选股分布
-
-按产业链归类展示筛选结果，包含平均 PE/PB/股息率 和 TOP5 标的。
-
 ---
 
 ## 📁 文件结构
@@ -268,8 +210,7 @@ chain-analyzer/
 ├── .gitignore                   # Git 忽略规则
 └── scripts/
     ├── chain_data.py            # 产业链知识库（25+行业预设）
-    ├── render.py                # 产业链全景 HTML 渲染器
-    └── value_screener.py        # 基本面选股 + 产业链分布
+    └── render.py                # 产业链全景 HTML 渲染器
 ```
 
 ### 核心模块说明
@@ -278,62 +219,15 @@ chain-analyzer/
 |------|------|
 | `chain_data.py` | 产业链知识图谱 + Tushare 数据获取 + 板块涨跌查询 |
 | `render.py` | 深色主题 HTML 生成，每个节点带涨跌标签 |
-| `value_screener.py` | 全市场基本面筛选，按产业链归类输出 |
 
 ---
 
 ## 🛠️ 技术栈
 
-- **数据源**：Tushare Pro（默认）/ AKShare / Baostock 等（可切换）
+- **数据源**：Tushare Pro（默认）/ AKShare / Baostock（可切换）
 - **语言**：Python 3.8+
 - **输出**：自包含 HTML（深色主题，零外部依赖）
 - **知识库**：25+ 行业预设产业链图谱，支持别名映射
-
----
-
-## 🔍 如何找到更多免费数据源
-
-如果你需要本工具未覆盖的数据，以下渠道可以找到免费/低成本的金融数据：
-
-### 开源 Python 库
-
-| 库名 | 安装 | 费用 | 特点 |
-|------|------|------|------|
-| `akshare` | `pip install akshare` | 免费 | 覆盖最全：A股/港股/期货/外汇/宏观 |
-| `baostock` | `pip install baostock` | 免费 | 数据规范，适合量化回测 |
-| `efinance` | `pip install efinance` | 免费 | 轻量级，东方财富接口封装 |
-| `tushare` | `pip install tushare` | 部分免费 | 老牌库，社区活跃 |
-| `qstock` | `pip install qstock` | 免费 | 面向量化新手，接口简洁 |
-
-### 在线数据平台
-
-| 平台 | 地址 | 费用 | 说明 |
-|------|------|------|------|
-| 东方财富 Choice | [choice.eastmoney.com](https://choice.eastmoney.com/) | 部分免费 | 网页版可查基础数据 |
-| 同花顺 iFinD | [ifind.com](https://www.ifind.com/) | 部分免费 | 行业/概念板块数据 |
-| 新浪财经 | [vip.stock.finance.sina.com.cn](https://vip.stock.finance.sina.com.cn/) | 免费 | 历史行情接口 |
-| 网易财经 | [quotes.money.163.com](https://quotes.money.163.com/) | 免费 | 财务报表数据 |
-
-### 搜索技巧
-
-在搜索引擎中找免费数据源时，推荐以下关键词组合：
-
-```
-# 找 Python 库
-python A股 数据 免费 开源
-python 股票数据 接口 无需token
-
-# 找特定数据
-免费 A股 板块指数 接口
-免费 行业板块 涨跌幅 API
-免费 财务数据 下载 CSV
-
-# 找替代方案
-tushare 替代 免费
-akshare 板块数据 教程
-```
-
-> ⚠️ 注意：免费接口可能因网站改版而失效，建议同时准备 1-2 个备用数据源。
 
 ---
 
@@ -343,7 +237,6 @@ akshare 板块数据 教程
 
 - 数据来源于公开接口，可能存在延迟或误差
 - 产业链知识图谱为预设模板，可能与实际情况存在偏差
-- 基本面选股仅为机械筛选，不构成买卖建议
 - 股市有风险，投资需谨慎
 
 ---
