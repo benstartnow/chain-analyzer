@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>基本面选股 · 产业链分布</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0b0d14; color: #e1e5eb; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; padding: 24px; display: flex; justify-content: center; }
+.container { max-width: 960px; width: 100%; }
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 1px solid #1a1f2e; margin-bottom: 24px; }
+.header h1 { font-size: 22px; font-weight: 600; color: #f0f4ff; }
+.header h1 .hl { color: #60a5fa; }
+.header .sub { font-size: 13px; color: #6b7280; margin-top: 6px; }
+.filter-bar { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.filter-item { background: #131724; border: 1px solid #1e2335; border-radius: 10px; padding: 10px 16px; text-align: center; min-width: 80px; }
+.filter-label { font-size: 10px; color: #6b7280; display: block; }
+.filter-value { font-size: 16px; font-weight: 600; color: #f0f4ff; margin-top: 2px; }
+.chain-card { background: #131724; border: 1px solid #1e2335; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+.chain-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.chain-name { font-size: 15px; font-weight: 600; color: #f0f4ff; }
+.chain-count { font-size: 12px; color: #6b7280; }
+.chain-meta { display: flex; gap: 16px; font-size: 11px; color: #9ca3af; margin-bottom: 10px; }
+.stock-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.stock-table th { text-align: left; color: #6b7280; padding: 6px 8px; border-bottom: 1px solid #1e2335; font-weight: 500; }
+.stock-table td { padding: 6px 8px; border-bottom: 1px solid #1a1f2e; color: #e1e5eb; }
+.stock-table tr:hover td { background: #1a1f2e; }
+.up { color: #ef4444; }
+.down { color: #22c55e; }
+.chg-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+.chg-badge.up { color: #ef4444; background: rgba(239,68,68,0.15); }
+.chg-badge.down { color: #22c55e; background: rgba(34,197,94,0.15); }
+.footer { text-align: center; padding: 24px 0; font-size: 11px; color: #374151; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>📊 基本面选股 · <span class="hl">产业链分布</span></h1>
+        <div class="sub">筛选条件：PE<20 | PB<2 | 股息率>0.5% | 市值>50亿 | 排除ST/次新</div>
+    </div>
+    
+    <div class="filter-bar">
+        <div class="filter-item"><span class="filter-label">符合标的</span><span class="filter-value">426</span></div>
+        <div class="filter-item"><span class="filter-label">覆盖产业链</span><span class="filter-value">6</span></div>
+        <div class="filter-item"><span class="filter-label">平均PE</span><span class="filter-value">12.3</span></div>
+        <div class="filter-item"><span class="filter-label">平均PB</span><span class="filter-value">1.12</span></div>
+        <div class="filter-item"><span class="filter-label">平均股息</span><span class="filter-value">3.9%</span></div>
+    </div>
+    
+    
+        <div class="chain-card">
+            <div class="chain-header">
+                <span class="chain-name">其他</span>
+                <span class="chain-count">355 只 (83.3%)</span>
+                
+            </div>
+            <div class="chain-meta">
+                <span>平均PE: 13.0</span>
+                <span>平均PB: 1.16</span>
+                <span>平均股息: 3.7%</span>
+            </div>
+            <table class="stock-table">
+                <tr><th>代码</th><th>名称</th><th>PE</th><th>PB</th><th>股息率</th></tr>
+                <tr><td>002572</td><td>索菲亚</td><td>8.9</td><td>1.03</td><td class="up">12.7%</td></tr><tr><td>603565</td><td>中谷物流</td><td>10.9</td><td>1.97</td><td class="up">11.9%</td></tr><tr><td>601919</td><td>中远海控</td><td>8.4</td><td>0.89</td><td class="up">11.6%</td></tr><tr><td>000915</td><td>华特达因</td><td>12.8</td><td>2.00</td><td class="up">9.9%</td></tr><tr><td>002818</td><td>富森美</td><td>9.9</td><td>1.32</td><td class="up">9.9%</td></tr>
+            </table>
+        </div>
+        
+        <div class="chain-card">
+            <div class="chain-header">
+                <span class="chain-name">有色金属（采选/冶炼/加工）</span>
+                <span class="chain-count">42 只 (9.9%)</span>
+                <span class="chg-badge up">+0.73%</span>
+            </div>
+            <div class="chain-meta">
+                <span>平均PE: 5.7</span>
+                <span>平均PB: 0.54</span>
+                <span>平均股息: 5.2%</span>
+            </div>
+            <table class="stock-table">
+                <tr><th>代码</th><th>名称</th><th>PE</th><th>PB</th><th>股息率</th></tr>
+                <tr><td>002839</td><td>张家港行</td><td>5.0</td><td>0.52</td><td class="up">7.4%</td></tr><tr><td>601577</td><td>长沙银行</td><td>4.3</td><td>0.48</td><td class="up">7.1%</td></tr><tr><td>002807</td><td>江阴银行</td><td>5.1</td><td>0.52</td><td class="up">7.1%</td></tr><tr><td>601328</td><td>交通银行</td><td>6.0</td><td>0.49</td><td class="up">6.7%</td></tr><tr><td>601398</td><td>工商银行</td><td>6.8</td><td>0.64</td><td class="up">6.4%</td></tr>
+            </table>
+        </div>
+        
+        <div class="chain-card">
+            <div class="chain-header">
+                <span class="chain-name">汽车（整车/零部件）</span>
+                <span class="chain-count">11 只 (2.6%)</span>
+                <span class="chg-badge down">-2.02%</span>
+            </div>
+            <div class="chain-meta">
+                <span>平均PE: 12.4</span>
+                <span>平均PB: 1.57</span>
+                <span>平均股息: 4.5%</span>
+            </div>
+            <table class="stock-table">
+                <tr><th>代码</th><th>名称</th><th>PE</th><th>PB</th><th>股息率</th></tr>
+                <tr><td>000651</td><td>格力电器</td><td>7.4</td><td>1.41</td><td class="up">7.8%</td></tr><tr><td>002508</td><td>老板电器</td><td>11.8</td><td>1.22</td><td class="up">6.6%</td></tr><tr><td>600690</td><td>海尔智家</td><td>10.3</td><td>1.54</td><td class="up">5.9%</td></tr><tr><td>603515</td><td>欧普照明</td><td>14.0</td><td>1.78</td><td class="up">5.2%</td></tr><tr><td>002705</td><td>新宝股份</td><td>11.3</td><td>1.09</td><td class="up">5.1%</td></tr>
+            </table>
+        </div>
+        
+        <div class="chain-card">
+            <div class="chain-header">
+                <span class="chain-name">食品饮料（加工/酿造/品牌）</span>
+                <span class="chain-count">7 只 (1.6%)</span>
+                <span class="chg-badge up">+0.85%</span>
+            </div>
+            <div class="chain-meta">
+                <span>平均PE: 15.1</span>
+                <span>平均PB: 1.54</span>
+                <span>平均股息: 4.9%</span>
+            </div>
+            <table class="stock-table">
+                <tr><th>代码</th><th>名称</th><th>PE</th><th>PB</th><th>股息率</th></tr>
+                <tr><td>000596</td><td>古井贡酒</td><td>14.8</td><td>1.60</td><td class="up">7.6%</td></tr><tr><td>600873</td><td>梅花生物</td><td>9.3</td><td>1.35</td><td class="up">5.4%</td></tr><tr><td>603369</td><td>今世缘</td><td>13.3</td><td>1.74</td><td class="up">4.8%</td></tr><tr><td>603043</td><td>广州酒家</td><td>15.4</td><td>1.89</td><td class="up">4.4%</td></tr><tr><td>603345</td><td>安井食品</td><td>17.7</td><td>1.69</td><td class="up">4.2%</td></tr>
+            </table>
+        </div>
+        
+        <div class="chain-card">
+            <div class="chain-header">
+                <span class="chain-name">电气设备（电机/电控/变压器）</span>
+                <span class="chain-count">6 只 (1.4%)</span>
+                <span class="chg-badge down">-1.97%</span>
+            </div>
+            <div class="chain-meta">
+                <span>平均PE: 14.1</span>
+                <span>平均PB: 1.39</span>
+                <span>平均股息: 2.1%</span>
+            </div>
+            <table class="stock-table">
+                <tr><th>代码</th><th>名称</th><th>PE</th><th>PB</th><th>股息率</th></tr>
+                <tr><td>601311</td><td>骆驼股份</td><td>12.6</td><td>0.94</td><td class="up">3.5%</td></tr><tr><td>601877</td><td>正泰电器</td><td>11.8</td><td>1.19</td><td class="up">2.4%</td></tr><tr><td>002533</td><td>金杯电工</td><td>13.6</td><td>1.79</td><td class="up">2.2%</td></tr><tr><td>688819</td><td>天能股份</td><td>17.8</td><td>1.29</td><td class="up">1.8%</td></tr><tr><td>002546</td><td>新联电子</td><td>10.8</td><td>1.56</td><td class="up">1.7%</td></tr>
+            </table>
+        </div>
+        
+        <div class="chain-card">
+            <div class="chain-header">
+                <span class="chain-name">机械设备（专用/通用设备）</span>
+                <span class="chain-count">5 只 (1.2%)</span>
+                <span class="chg-badge down">-1.97%</span>
+            </div>
+            <div class="chain-meta">
+                <span>平均PE: 13.1</span>
+                <span>平均PB: 1.27</span>
+                <span>平均股息: 5.7%</span>
+            </div>
+            <table class="stock-table">
+                <tr><th>代码</th><th>名称</th><th>PE</th><th>PB</th><th>股息率</th></tr>
+                <tr><td>002327</td><td>富安娜</td><td>15.6</td><td>1.43</td><td class="up">9.7%</td></tr><tr><td>600987</td><td>航民股份</td><td>9.0</td><td>0.97</td><td class="up">6.2%</td></tr><tr><td>601339</td><td>百隆东方</td><td>15.0</td><td>1.16</td><td class="up">5.7%</td></tr><tr><td>603889</td><td>新澳股份</td><td>10.3</td><td>1.34</td><td class="up">4.3%</td></tr><tr><td>603055</td><td>台华新材</td><td>15.5</td><td>1.43</td><td class="up">2.9%</td></tr>
+            </table>
+        </div>
+        
+    
+    <div class="footer">数据来源：Tushare API · 20260703 · 仅供参考，不构成投资建议</div>
+</div>
+</body>
+</html>
